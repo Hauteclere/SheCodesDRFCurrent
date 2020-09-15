@@ -8,8 +8,5 @@ class CustomUserSerializer(serializers.Serializer):
 	password = serializers.CharField(write_only = True)
 	
 	def create(self, validated_data):
-		password = validated_data.pop('password')		
-		user = CustomUser(**validated_data)
-		user.set_password(password)
-		user.save()
-		return user
+		return CustomUser.objects.create_user(**validated_data)
+
